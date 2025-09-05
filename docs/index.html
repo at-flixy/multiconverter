@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8" />
+		<title>Multiconverter — Главная</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link href="assets/styles.css" rel="stylesheet" />
+		<script defer src="assets/app.js"></script>
+	</head>
+	<body>
+		<header class="header">
+			<div class="logo"><span class="dot"></span> Multiconverter</div>
+			<nav id="nav">
+				<a href="/" class="active">Главная</a>
+				<a href="/image.html">Изображения</a>
+				<a href="/audio.html">Аудио</a>
+				<a href="/video.html">Видео</a>
+				<a href="/document.html">Документы</a>
+				<a href="/archive.html">Архивы</a>
+				<a href="/ocr.html">OCR</a>
+				<a href="/generation.html">Генерация</a>
+				<a href="/translation.html">Перевод</a>
+				<a href="/download.html" >Downloads</a>
+				<a href="/files.html">Файлы</a>
+				<a href="/tasks.html">Задачи</a>
+				<a href="/settings.html">Настройки</a>
+			</nav>
+			<div class="nav-right">
+				<span id="user-label" class="badge">Гость</span>
+				<button id="btn-auth" class="btn ghost">Войти</button>
+			</div>
+		</header>
+
+		<div class="container">
+			<section class="card">
+				<h1>Добро пожаловать 👋</h1>
+				<p class="muted">
+					Выберите раздел сверху: конвертация изображений, OCR, генерация
+					картинок, перевод текста, просмотр файлов и задач.
+				</p>
+			</section>
+		</div>
+
+		<!-- Модал авторизации -->
+		<div id="auth-modal" class="modal">
+			<section class="card">
+				<h2>Вход / Регистрация</h2>
+				<div class="grid">
+					<div>
+						<label>Email</label>
+						<input id="auth-email" type="email" placeholder="you@example.com" />
+					</div>
+					<div>
+						<label>Пароль</label>
+						<input id="auth-pass" type="password" placeholder="••••••••" />
+					</div>
+				</div>
+				<div class="row" style="margin-top: 12px">
+					<button id="btn-login">Войти</button>
+					<button id="btn-register" class="secondary">Регистрация</button>
+					<button id="btn-close-auth" class="ghost">Закрыть</button>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>
