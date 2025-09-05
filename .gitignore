@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# IDE
+.idea/
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Project runtime
+backend/uploads/
+backend/results/
+backend/static/
+backend/instance/app.db*
+backend/instance/static/
+backend/web/uploads/
+backend/web/results/
+
+# Secrets
+apikey
+backend/apikey
+.env

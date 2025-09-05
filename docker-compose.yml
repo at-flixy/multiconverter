@@ -1,0 +1,66 @@
+services:
+  redis:
+    image: redis:7.4
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: multiconv-backend
+    env_file: .env
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/results:/app/results
+      - ./backend/instance:/app/instance
+      # фронт у тебя в backend/web → монтируем его, а не ./frontend
+      - ./backend/web:/app/web:ro
+    command: >
+      gunicorn app:app --bind 0.0.0.0:5000 --workers 2 --threads 4 --timeout 300
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: multiconv-worker
+    env_file: .env
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/results:/app/results
+      - ./backend/instance:/app/instance
+      - ./backend:/app
+    command: celery -A celery_app.celery worker --loglevel=INFO --concurrency=2
+
+  beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: multiconv-beat
+    env_file: .env
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/results:/app/results
+      - ./backend/instance:/app/instance
+      - ./backend:/app
+    command: celery -A celery_app.celery beat --loglevel=INFO

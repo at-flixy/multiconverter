@@ -1,0 +1,30 @@
+# --- Core / API ---
+Flask
+Flask-Cors
+Flask-Limiter
+Flask-JWT-Extended
+Flask-SQLAlchemy
+SQLAlchemy
+
+# --- Media & archives ---
+Pillow
+ffmpeg-python
+pydub
+py7zr
+patool
+
+# --- Docs / OCR ---
+pdfminer.six
+xlsx2csv
+pdf2image
+pytesseract
+
+# --- OpenAI (новый SDK used: from openai import OpenAI) ---
+openai>=1.0.0
+
+# --- Downloader ---
+yt-dlp
+
+# --- Server / Workers ---
+gunicorn
+celery[redis]
