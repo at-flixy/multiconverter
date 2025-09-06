@@ -1,5 +1,12 @@
 # Multiconverter — FULL (Vert.x + Flask + Celery + SQLite)
 
+
+   _   _           _                 _             _      _                 
+  /_\ | |_ __ ___ (_)_ __  __  __   /_\  _ __ ___ (_)_ __| |__   __ _ _ __  
+ //_\\| | '_ ` _ \| | '__| \ \/ /  //_\\| '_ ` _ \| | '__| '_ \ / _` | '_ \ 
+/  _  \ | | | | | | | |     >  <  /  _  \ | | | | | | |  | | | | (_| | | | |
+\_/ \_/_|_| |_| |_|_|_|    /_/\_\ \_/ \_/_| |_| |_|_|_|  |_| |_|\__,_|_| |_|
+                                              
 ## Состав
 - **gateway/** — Kotlin Vert.x: раздаёт `web/`, проксирует `/api/*` → Flask
 - **backend/** — Flask API, Celery воркеры/beat, SQLite, файлы в `static/`
@@ -45,3 +52,22 @@ OPENAI_API_KEY=   # опционально для перевода/генера�
 - `POST /api/files/upload`, `GET /api/files/:id`
 - `POST /api/tasks`, `GET /api/tasks/:id`, `GET /api/tasks`
 - `GET /api/notifications`
+
+## Основной граф платформы
+          [ Web UI ]  
+              │  
+              ▼  
+        [ Gateway (Vert.x) ]  
+              │  
+   ┌──────────┴───────────┐  
+   ▼                      ▼  
+[ Flask API ]       [ Static Files ]  
+      │  
+      ▼  
+ [ Celery Workers ] <──> [ Redis Broker ]  
+      │  
+      ▼  
+   [ SQLite DB ]  
+
+
+                                                                            
